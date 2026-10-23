@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
+    "build:prod": "npm run db:postgres && prisma generate && prisma db push && npm run build",
     "start": "node dist/server.js",
+    "db:postgres": "node -e \"const fs=require('fs'); fs.copyFileSync('prisma/schema.postgresql.prisma', 'prisma/schema.prisma');\"",
+    "db:sqlite": "node -e \"const fs=require('fs'); fs.copyFileSync('prisma/schema.sqlite.prisma', 'prisma/schema.prisma');\"",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:seed": "tsx prisma/seed.ts",

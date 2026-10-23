@@ -27,8 +27,26 @@ app.use(helmet({
   crossOriginResourcePolicy: false,
 }));
 
+const allowedOrigins = (env.CLIENT_URL || '')
+  .split(',')
+  .map((url) => url.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+
 app.use(cors({
-  origin: env.CLIENT_URL,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes('*') ||
+      allowedOrigins.includes(origin) ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1') ||
+      origin.endsWith('.onrender.com') ||
+      origin.endsWith('.vercel.app')
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 }));
 

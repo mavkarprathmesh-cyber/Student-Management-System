@@ -1,4 +1,10 @@
-const API_BASE = '/api';
+const getBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return '/api';
+  return envUrl.endsWith('/api') ? envUrl : `${envUrl.replace(/\/$/, '')}/api`;
+};
+
+const API_BASE = getBaseUrl();
 
 interface RequestOptions extends RequestInit {
   params?: Record<string, any>;

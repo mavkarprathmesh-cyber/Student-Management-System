@@ -4,15 +4,16 @@
   "description": "Production-Ready Complete Student Management System",
   "private": true,
   "scripts": {
-    "dev:server": "npm.cmd --prefix server run dev",
-    "dev:client": "npm.cmd --prefix client run dev",
-    "dev": "npm.cmd run dev:server",
-    "build:server": "npm.cmd --prefix server run build",
-    "build:client": "npm.cmd --prefix client run build",
-    "build": "npm.cmd run build:server && npm.cmd run build:client",
-    "test:server": "npm.cmd --prefix server run test",
-    "test": "npm.cmd run test:server",
-    "seed": "npm.cmd --prefix server run prisma:seed"
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev": "npm run dev:client",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build": "npm --prefix client run build",
+    "build:all": "npm --prefix server run build && npm --prefix client run build",
+    "test:server": "npm --prefix server run test",
+    "test": "npm run test:server",
+    "seed": "npm --prefix server run prisma:seed"
   },
   "keywords": ["student-management-system", "education", "react", "express", "prisma", "typescript"]
 }
